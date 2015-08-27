@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+	<title>Directives</title>
+	<script src="angular/angular.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap-theme.css" />
+	<script>
+		angular.module("demoApp",[])
+		.controller("defaultCtrl", function($scope){
+			$scope.todos = [
+			{action: "Task 1",  complete: false},
+			{action: "Task 2",  complete: false},
+			{action: "Task 3",  complete: true},
+			{action: "Task 4",  complete: false},
+			{action: "Task 5",  complete: false}];
+		});
+	</script>
+	<style>
+		.odd {background-color: lightcoral}
+		.even {background-color: lavenderblush}
+	</style>
+</head>
+<body>
+	<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+		<h3 class="panel-header">To Do List</h3>
+
+		<div>There are {{todos.length}} items</div>
+
+		<div class="well">
+			<table class="table">
+				<thead><tr><th>Action</th><th>Status</th></tr></thead>
+				<tbody>
+					<tr ng-repeat="item in todos" ng-class="item.complete ? 'odd' : 'even'">
+						<td>{{$index+1}}.{{item.action}}<td>{{item.complete}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="form-group well">
+			<label for="firstItem">Set First tem:</label>
+			<input name="firstItem" class="form-control" ng-model="todos[0].action" />
+		</div>
+
+	</div>
+</body>
+</html>
